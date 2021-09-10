@@ -3,6 +3,7 @@ package com.eshop.cache;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.eshop.cache.listener.InitListener;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -10,6 +11,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -50,6 +52,15 @@ public class Application {
         jedisClusterNodes.add(new HostAndPort("192.168.1.15", 7006));
         JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes);
         return jedisCluster;
+    }
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Bean
+    public ServletListenerRegistrationBean servletListenerRegistrationBean() {
+        ServletListenerRegistrationBean servletListenerRegistrationBean =
+                new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new InitListener());
+        return servletListenerRegistrationBean;
     }
 
     public static void main(String[] args) {

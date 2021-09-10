@@ -1,6 +1,7 @@
 package com.eshop.cache.service;
 
 import com.eshop.cache.model.ProductInfo;
+import com.eshop.cache.model.ShopInfo;
 
 /**
  * 缓存service接口
@@ -22,5 +23,42 @@ public interface CacheService {
 	 * @return
 	 */
 	ProductInfo getLocalCache(Long id);
-	
+
+	/**
+	 * 将商品信息保存到本地的ehcache缓存中
+	 * @param productInfo
+	 */
+	ProductInfo saveProductInfo2LocalCache(ProductInfo productInfo);
+
+	/**
+	 * 从本地ehcache缓存中获取商品信息
+	 * @param productId
+	 * @return
+	 */
+	ProductInfo getProductInfoFromLocalCache(Long productId);
+
+	/**
+	 * 将店铺信息保存到本地的ehcache缓存中
+	 * @param shopInfo
+	 */
+	ShopInfo saveShopInfo2LocalCache(ShopInfo shopInfo);
+
+	/**
+	 * 从本地ehcache缓存中获取店铺信息
+	 * @param shopId
+	 * @return
+	 */
+	ShopInfo getShopInfoFromLocalCache(Long shopId);
+
+	/**
+	 * 将商品信息保存到redis中
+	 * @param productInfo
+	 */
+	void saveProductInfo2ReidsCache(ProductInfo productInfo);
+
+	/**
+	 * 将店铺信息保存到redis中
+	 * @param shopInfo
+	 */
+	void saveShopInfo2ReidsCache(ShopInfo shopInfo);
 }

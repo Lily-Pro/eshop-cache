@@ -19,7 +19,7 @@ public class CacheController {
 
 	@Resource
 	private CacheService cacheService;
-	
+
 	@RequestMapping("/testPutCache")
 	@ResponseBody
 	public String testPutCache(ProductInfo productInfo) {
